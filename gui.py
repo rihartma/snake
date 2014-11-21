@@ -15,6 +15,7 @@ def vykresli_ctverecek(x,y,color):
             velikost_policka,velikost_policka))
 
 def vykresli(had,jidlo):
+    screen.fill((0,0,0))
     for x,y in had:
         vykresli_ctverecek(x,y,(0,0,255))
     vykresli_ctverecek(x,y,(255,0,0))
@@ -22,11 +23,27 @@ def vykresli(had,jidlo):
     for x,y in jidlo:
         vykresli_ctverecek(x,y,(0,255,0))
 
+
 had = snake.had()
 jidlo=set()
 snake.pridej_zradlo(had, jidlo)
-vykresli(had,jidlo)
 
-        
-pygame.display.flip()
+
+while True:
+    vykresli(had,jidlo)
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            pygame.quit()
+            quit()
+        if event.type == KEYDOWN:
+            if event.key == K_DOWN:
+                snake.pohyb("dolu", had, jidlo)
+            elif event.key == K_UP:
+                snake.pohyb("nahoru", had, jidlo)
+            if event.key == K_LEFT:
+                snake.pohyb("vlevo", had, jidlo)
+            if event.key == K_RIGHT:
+                snake.pohyb("vpravo", had, jidlo)
+            
+    pygame.display.flip()
 
