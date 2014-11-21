@@ -3,10 +3,11 @@ import snake
 from time import time
 from pygame.locals import *
 pygame.init()
-okno = 500
+vodorovne = 20
+svisle = 10
 velikost_policka = 50
 pocet_pole = 10
-screen = pygame.display.set_mode((okno,okno))
+screen = pygame.display.set_mode((vodorovne*50,svisle*50))
 
 def vykresli_ctverecek(x,y,color):
     screen.fill(color,pygame.Rect(
@@ -37,7 +38,7 @@ while True:
         if len(ukoly):
             smer = ukoly[0]
             del ukoly[0]
-        snake.pohyb(smer, had, jidlo)
+        snake.pohyb(smer, had, jidlo,vodorovne,svisle)
         vykresli(had,jidlo)
         
     for event in pygame.event.get():
