@@ -65,11 +65,4 @@ def pohyb(smer,had, jidlo, velikost_pole=10):
     had.append((x, y)) 
 
 
-a = had()
-jidlo=set()
-pridej_zradlo(a, jidlo)
 
-while True:
-    vykresli(a,jidlo)
-    s = raw_input("Zadej směr: ")
-    pohyb(s, a,jidlo)
