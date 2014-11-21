@@ -1,6 +1,6 @@
 import pygame
 import snake
-from random import randint
+from time import time
 from pygame.locals import *
 pygame.init()
 okno = 500
@@ -27,23 +27,31 @@ def vykresli(had,jidlo):
 had = snake.had()
 jidlo=set()
 snake.pridej_zradlo(had, jidlo)
-
-
+smer = "dolu"
+cas = time()
+ukoly = []
+smer = "vpravo"
 while True:
-    vykresli(had,jidlo)
+    if time()-cas > .1:
+        cas = time()
+        if len(ukoly):
+            smer = ukoly[0]
+            del ukoly[0]
+        snake.pohyb(smer, had, jidlo)
+        vykresli(had,jidlo)
+        
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
             quit()
         if event.type == KEYDOWN:
             if event.key == K_DOWN:
-                snake.pohyb("dolu", had, jidlo)
+                ukoly.append("dolu")
             elif event.key == K_UP:
-                snake.pohyb("nahoru", had, jidlo)
+                ukoly.append("nahoru")
             if event.key == K_LEFT:
-                snake.pohyb("vlevo", had, jidlo)
+                ukoly.append("vlevo")
             if event.key == K_RIGHT:
-                snake.pohyb("vpravo", had, jidlo)
-            
+                ukoly.append("vpravo")
     pygame.display.flip()
 
