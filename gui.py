@@ -1,5 +1,6 @@
 import pygame
 import snake
+from random import randint
 from pygame.locals import *
 pygame.init()
 okno = 500
@@ -18,8 +19,13 @@ def vykresli(had,jidlo):
         vykresli_ctverecek(x,y,(0,0,255))
     vykresli_ctverecek(x,y,(255,0,0))
 
+    for x,y in jidlo:
+        vykresli_ctverecek(x,y,(0,255,0))
+
 had = snake.had()
-vykresli(had,set())
+jidlo=set()
+snake.pridej_zradlo(had, jidlo)
+vykresli(had,jidlo)
 
         
 pygame.display.flip()
